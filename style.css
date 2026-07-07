@@ -1,0 +1,442 @@
+/* =========================================================
+   Kiln & Craft — style.css
+   Design tokens live as custom properties on :root/body so the
+   CSS-only theme switcher (see .theme-radios) can swap them with
+   body:has(#theme-x:checked) — no JavaScript anywhere in this file.
+   ========================================================= */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+:root {
+  /* ---- Clay (default) theme ---- */
+  --bg: #EAE3D6;
+  --surface: #F4EEE3;
+  --text: #241F1B;
+  --text-soft: #55493F;
+  --accent: #2F6F64;      /* deep teal */
+  --accent-soft: #C98A2B; /* mustard  */
+  --border: #C9BFA9;
+
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-label: 'Courier New', ui-monospace, monospace;
+
+  --space-1: clamp(0.5rem, 0.45rem + 0.3vw, 0.75rem);
+  --space-2: clamp(0.9rem, 0.8rem + 0.5vw, 1.25rem);
+  --space-3: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  --space-4: clamp(2.5rem, 2rem + 2vw, 4rem);
+
+  --radius: 4px;
+  --max-width: 1160px;
+}
+
+body:has(#theme-ink:checked) {
+  --bg: #1B1B1D;
+  --surface: #262528;
+  --text: #EDE7DC;
+  --text-soft: #B8AFA2;
+  --accent: #E3A548;
+  --accent-soft: #7FA396;
+  --border: #3A3833;
+}
+
+body:has(#theme-meadow:checked) {
+  --bg: #E7EEE1;
+  --surface: #F2F6EE;
+  --text: #223324;
+  --text-soft: #4C5D4D;
+  --accent: #B5563C;
+  --accent-soft: #5C7A4E;
+  --border: #C7D5BE;
+}
+
+/* ---- Reset-ish basics ---- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  transition: background-color .25s ease, color .25s ease;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0 0 var(--space-1); }
+p { margin: 0 0 var(--space-2); color: var(--text-soft); }
+code { font-family: var(--font-label); background: var(--surface); padding: .1em .35em; border-radius: 3px; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--accent); color: #fff;
+  padding: .6rem 1rem; z-index: 100;
+}
+.skip-link:focus { left: var(--space-2); top: var(--space-2); }
+
+/* Theme radios are visually hidden but keep the inputs operable via labels */
+.theme-radios {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+}
+
+/* =========================================================
+   Header / Nav
+   ========================================================= */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg);
+}
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex; align-items: center; gap: .4rem;
+  margin-right: auto;
+}
+.brand-mark { color: var(--accent); }
+
+.site-nav {
+  display: flex;
+  gap: var(--space-3);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: .78rem;
+  letter-spacing: .08em;
+}
+.site-nav a { text-decoration: none; color: var(--text-soft); padding: .3rem 0; border-bottom: 2px solid transparent; }
+.site-nav a:hover { color: var(--text); }
+.site-nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+.theme-switcher {
+  display: flex; gap: .5rem;
+  border: 0; margin: 0; padding: 0;
+}
+.theme-swatch {
+  width: 1.15rem; height: 1.15rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid var(--border);
+}
+.swatch-clay { background: #2F6F64; }
+.swatch-ink { background: #1B1B1D; }
+.swatch-meadow { background: #B5563C; }
+body:has(#theme-clay:checked) .swatch-clay,
+body:has(#theme-ink:checked) .swatch-ink,
+body:has(#theme-meadow:checked) .swatch-meadow {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--text);
+}
+
+/* =========================================================
+   Layout shell
+   ========================================================= */
+.site-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3);
+}
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-4);
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3);
+  font-size: .85rem;
+  color: var(--text-soft);
+}
+.footer-note { margin: 0; }
+
+/* =========================================================
+   Hero / eyebrow / labels
+   ========================================================= */
+.eyebrow {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .75rem;
+  color: var(--accent-soft);
+  margin-bottom: .4rem;
+}
+.hero { padding: var(--space-4) 0 var(--space-3); max-width: 46rem; }
+.hero-compact { padding: var(--space-3) 0 var(--space-2); }
+.hero h1 { font-size: clamp(1.8rem, 1.4rem + 2vw, 2.8rem); }
+.lede { font-size: 1.05rem; }
+
+.section-heading {
+  font-size: 1.2rem;
+  margin-top: var(--space-3);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .4rem;
+}
+
+/* =========================================================
+   Filter bar (discipline chips)
+   ========================================================= */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+  margin-bottom: var(--space-3);
+}
+.chip {
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: .4rem .9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-soft);
+}
+.chip:hover { border-color: var(--accent); color: var(--text); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+/* =========================================================
+   Member grid + cards (CSS Grid, deliberate breakpoints)
+   ========================================================= */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.member-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  transform: rotate(var(--tilt, 0deg));
+}
+.member-card:nth-child(odd) { --tilt: -0.4deg; }
+.member-card:nth-child(even) { --tilt: 0.4deg; }
+.member-card a { text-decoration: none; display: block; }
+.member-card h2 { font-size: 1.05rem; margin-top: var(--space-1); }
+.member-bio { font-size: .92rem; }
+.empty-state { color: var(--text-soft); font-style: italic; }
+
+.member-avatar {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 3rem; height: 3rem;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .02em;
+}
+.member-avatar.avatar-large { width: 4.5rem; height: 4.5rem; font-size: 1.3rem; }
+
+.discipline-tag {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+/* Discipline color coding — reused across avatars, tiles, gallery */
+.avatar-illustration, .tile-illustration { background: #B5563C; }
+.avatar-photography, .tile-photography { background: #4A5B6B; }
+.avatar-ceramics, .tile-ceramics { background: #2F6F64; }
+.avatar-printmaking, .tile-printmaking { background: #7A4E8C; }
+.avatar-weaving, .tile-weaving { background: #C98A2B; }
+.avatar-woodworking, .tile-woodworking { background: #6B4A32; }
+
+/* =========================================================
+   Profile page
+   ========================================================= */
+.back-link { display: inline-block; margin-bottom: var(--space-2); text-decoration: none; color: var(--text-soft); }
+.profile-head { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+.profile-bio { font-size: 1.05rem; max-width: 40rem; }
+.profile-projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.project-tile, .masonry-tile, .lightbox-panel {
+  color: #fff;
+}
+.project-tile {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  display: flex; align-items: flex-end;
+  padding: var(--space-2);
+  font-weight: 600;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: .75rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.cta-button:hover { filter: brightness(1.08); }
+
+/* =========================================================
+   Masonry gallery (CSS columns) + :target lightbox
+   ========================================================= */
+.masonry-gallery {
+  column-count: 3;
+  column-gap: var(--space-2);
+}
+.masonry-tile {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius);
+  text-decoration: none;
+  padding: var(--space-2);
+  min-height: 8rem;
+}
+.masonry-tile:nth-child(3n) { min-height: 12rem; }
+.masonry-tile:nth-child(4n) { min-height: 6rem; }
+.masonry-title { display: block; font-weight: 700; }
+.masonry-artist { display: block; font-size: .82rem; opacity: .85; margin-top: .25rem; }
+
+.lightbox {
+  display: none;
+  position: fixed; inset: 0;
+  z-index: 60;
+}
+.lightbox:target { display: block; }
+.lightbox-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(20, 16, 12, .65);
+}
+.lightbox-panel {
+  position: relative;
+  max-width: 32rem;
+  margin: 12vh auto 0;
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+.lightbox-panel .discipline-tag { color: rgba(255,255,255,.85); }
+.lightbox-panel p { color: rgba(255,255,255,.85); }
+.lightbox-close {
+  position: absolute; top: .6rem; right: .8rem;
+  font-size: 1.6rem; text-decoration: none; color: #fff;
+  line-height: 1;
+}
+
+/* =========================================================
+   Workshops / events list
+   ========================================================= */
+.event-list { list-style: none; margin: 0; padding: 0; }
+.event-row {
+  display: flex; gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+.event-date {
+  flex: 0 0 4rem;
+  text-align: center;
+  font-family: var(--font-label);
+}
+.event-day { display: block; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+.event-month { display: block; text-transform: uppercase; font-size: .75rem; color: var(--text-soft); }
+.event-info h2 { font-size: 1.1rem; }
+
+/* =========================================================
+   Commission form
+   ========================================================= */
+.commission-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 34rem;
+}
+.commission-form label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  color: var(--text-soft);
+  margin-top: var(--space-1);
+}
+.commission-form input,
+.commission-form select,
+.commission-form textarea {
+  font: inherit;
+  padding: .6rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+.commission-form button { margin-top: var(--space-2); align-self: flex-start; }
+
+.form-errors {
+  background: var(--surface);
+  border: 1px solid var(--accent-soft);
+  border-left: 4px solid var(--accent-soft);
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-2);
+}
+.form-errors ul { margin: 0; padding-left: 1.2rem; }
+
+.inquiry-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  margin-bottom: var(--space-3);
+  max-width: 34rem;
+}
+
+/* =========================================================
+   Responsive breakpoints
+   Breakpoint 1: 768px (tablet) — grids/gallery drop one column
+   Breakpoint 2: 480px (phone)  — single column, rows stack
+   ========================================================= */
+@media (max-width: 768px) {
+  .member-grid { grid-template-columns: repeat(2, 1fr); }
+  .masonry-gallery { column-count: 2; }
+  .profile-projects { grid-template-columns: 1fr; }
+  .site-nav { gap: var(--space-2); }
+}
+
+@media (max-width: 480px) {
+  .header-inner { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
+  .brand { margin-right: 0; }
+  .member-grid { grid-template-columns: 1fr; }
+  .masonry-gallery { column-count: 1; }
+  .event-row { flex-direction: column; gap: var(--space-1); }
+  .event-date { text-align: left; }
+  .profile-head { flex-direction: column; align-items: flex-start; }
+  .lightbox-panel { margin: 8vh 1rem 0; }
+}
