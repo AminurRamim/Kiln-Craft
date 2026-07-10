@@ -313,9 +313,11 @@ body:has(#theme-meadow:checked) .swatch-meadow {
     width: 400px;
     max-width: 400px;
     height: 300px;
-    max-height: auto;
+    max-height: 300px;
     object-fit: cover;
     display: block;
+    border: 2px solid black;
+    border-radius: 25px;
 }
 
 .project-images img:only-child {
