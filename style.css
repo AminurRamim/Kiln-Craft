@@ -275,20 +275,56 @@ body:has(#theme-meadow:checked) .swatch-meadow {
 .profile-head { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
 .profile-bio { font-size: 1.05rem; max-width: 40rem; }
 .profile-projects {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
 }
-.project-tile, .masonry-tile, .lightbox-panel {
-  color: #fff;
+
+.project-tile,
+.masonry-tile,
+.lightbox-panel {
+    color: #fff;
 }
+
 .project-tile {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius);
-  display: flex; align-items: flex-end;
-  padding: var(--space-2);
-  font-weight: 600;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.project-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 400px;
+}
+
+ img {
+    width: 400px;
+    max-width: 400px;
+    height: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-images img:only-child {
+    grid-column: 1 / -1;
+}
+
+.project-title {
+    width: 100%;
+    text-align: center;
 }
 
 .cta-button {
