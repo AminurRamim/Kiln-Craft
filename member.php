@@ -32,6 +32,14 @@ include 'includes/header.php';
   <div class="profile-projects">
     <?php foreach ($member['projects'] as $p): ?>
       <div class="project-tile tile-<?= slug($member['discipline']) ?>">
+        <?php foreach ($p['pictures'] as $picture): ?>
+            <span>
+                <img class="project-images"
+                    src="uploads/<?= htmlspecialchars($picture) ?>"
+                    alt="<?= htmlspecialchars($p['title'] . ' — ' . $member['discipline']) ?>"
+                >
+            </span>
+        <?php endforeach; ?>
         <span class="project-title"><?= htmlspecialchars($p['title']) ?></span>
       </div>
     <?php endforeach; ?>

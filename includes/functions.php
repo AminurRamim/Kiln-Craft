@@ -18,8 +18,17 @@ function get_members(): array {
             'initials' => 'MC',
             'bio' => 'Maya draws ink-and-gouache portraits inspired by Chinatown storefronts. She teaches a Saturday sketch walk every month.',
             'projects' => [
-                ['title' => 'Storefront Series No. 4'],
-                ['title' => 'Night Market Sketchbook'],
+                ['title' => 'Storefront Series No. 4',
+                    'pictures' => [
+                        'storefront-no4.jpg'
+                    ]
+                ],
+                ['title' => 'Night Market Sketchbook',
+                    'pictures' => [
+                        'nightmarket-sketch1.jpg',
+                        'nightmarket-sketch2.jpg'
+                    ]
+                ],
             ],
         ],
         [
@@ -29,8 +38,15 @@ function get_members(): array {
             'initials' => 'JO',
             'bio' => 'Jordan shoots medium-format film around old industrial buildings, chasing the light before it changes.',
             'projects' => [
-                ['title' => 'Foundry Light'],
-                ['title' => 'Rooftop Water Towers'],
+                ['title' => 'Foundry Light',
+                    'pictures' => ['foundry-light.jpg']
+                ],
+                ['title' => 'Rooftop Water Towers',
+                    'pictures' => [
+                        'rooftop-water-tower1.jpg',
+                        'rooftop-water-tower2.jpg'
+                    ]
+                ],
             ],
         ],
         [
@@ -40,8 +56,18 @@ function get_members(): array {
             'initials' => 'EP',
             'bio' => 'Elena throws stoneware on a kick wheel and finishes every piece with a hand-mixed ash glaze.',
             'projects' => [
-                ['title' => 'Ash-Glaze Tea Set'],
-                ['title' => 'Coiled Vessel Study'],
+                ['title' => 'Ash-Glaze Tea Set',
+                    'pictures' => [
+                         'pottery1.jpg',
+                         'pottery2.jpg'
+                    ]
+                ],
+                ['title' => 'Coiled Vessel Study',
+                    'pictures' => [
+                        'pottery3.jpg',
+                        'pottery4.jpg'
+                    ]
+                ],
             ],
         ],
         [
@@ -51,8 +77,17 @@ function get_members(): array {
             'initials' => 'SW',
             'bio' => 'Sam carves linocuts of neighborhood corner stores, printing small runs on a hand press.',
             'projects' => [
-                ['title' => 'Corner Store Linocuts'],
-                ['title' => 'Rainy Day Reduction Print'],
+                ['title' => 'Corner Store Linocuts',
+                    'pictures' => [
+                        'linocut1.jpg',
+                        'linocut2.jpg'
+                    ]
+                ],
+                ['title' => 'Rainy Day Reduction Print',
+                    'pictures' => [
+                        'rainy-day-reduction-print.jpg'
+                    ]
+                ],
             ],
         ],
         [
@@ -62,8 +97,17 @@ function get_members(): array {
             'initials' => 'PA',
             'bio' => 'Priya weaves floor looms with hand-dyed wool, working in patterns passed down from her grandmother.',
             'projects' => [
-                ['title' => 'Indigo Runner'],
-                ['title' => 'Grandmother\'s Pattern, Reworked'],
+                ['title' => 'Indigo Runner',
+                    'pictures' => [
+                         'weaving1.jpg'
+                    ]
+                ],
+                ['title' => 'Grandmother\'s Pattern, Reworked',
+                     'pictures' => [
+                            'weaving2.jpg',
+                            'weaving3.jpg'
+                      ]
+                ],
             ],
         ],
         [
@@ -73,8 +117,18 @@ function get_members(): array {
             'initials' => 'MB',
             'bio' => 'Marcus builds joined furniture without nails, favoring reclaimed oak and hand-cut dovetails.',
             'projects' => [
-                ['title' => 'Reclaimed Oak Bench'],
-                ['title' => 'Dovetail Keepsake Box'],
+                ['title' => 'Reclaimed Oak Bench',
+                    'pictures' => [
+                        'woodworking1.jpg',
+                        'woodworking2.jpg'
+                    ]
+                ],
+                ['title' => 'Dovetail Keepsake Box',
+                    'pictures' => [
+                        'woodworking3.jpg',
+                        'woodworking4.jpg'
+                    ]
+                ],
             ],
         ],
     ];
