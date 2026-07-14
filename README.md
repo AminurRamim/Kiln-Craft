@@ -29,7 +29,6 @@ The project was built without JavaScript. Interactive features such as the galle
 
 ## Project Structure
 
-```text
 project-root/
 ├── includes/
 │   ├── header.php
